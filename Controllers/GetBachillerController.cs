@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using WebAppEmberServicio.Models;
 using WebFichaPersonal.Data;
 using WebFichaPersonal.Logic;
 
@@ -27,29 +28,14 @@ namespace WebAppEmberServicio.Controllers
             return Json(Bachiller);
         }
 
-
-        //public List<BachillerModelo> DetalleServicio(int id)
-        //{
-        //    List<BachillerModelo> lista = new List<BachillerModelo>();
-
-        //    List<SPA_GetBachillerato_Result> Bachiller = GetFichaPersonalMgr.Instancia.getBachiller(id);
-        //    List<int> listaContactoEmergencia = Bachiller.Select(x => x.empleadoID).Distinct().ToList();
-        //    foreach (var item in listaContactoEmergencia)
-        //    {
-        //        SPA_GetBachillerato_Result obj = Bachiller.Where(x => x.empleadoID == item).FirstOrDefault();
-        //        BachillerModelo bachillerato_model = new BachillerModelo();
-        //        bachillerato_model.TipoColegio = obj.TipoColegio;
-        //        bachillerato_model.NombreColegio = obj.NombreColegio;
-        //        bachillerato_model.UltimoGradoVencido = obj.UltimoCursoVencido;
-        //        bachillerato_model.Lugar = obj.Lugar;
-        //        lista.Add(bachillerato_model);
-        //    }
-        //    return lista;
-        //}
-
-        // POST: api/GetBachiller
-        public void Post([FromBody]string value)
+        // POST: api/GetBachiller        
+        [HttpPost]
+        public ResultModel Post([FromBody] BachillerModelo bachiller)
         {
+            var dato = UpdateFichaPersonalMgr.Instancia.ActualizarBachiller(bachiller.empleadoID, bachiller.NombreColegio,
+                          bachiller.Lugar, bachiller.TipoColegio, bachiller.UltimoCursoVencido, bachiller.Identificador);
+          
+            return (dato);
         }
 
         // PUT: api/GetBachiller/5

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using WebAppEmberServicio.Models;
 using WebFichaPersonal.Data;
 using WebFichaPersonal.Logic;
 
@@ -21,50 +22,26 @@ namespace WebAppEmberServicio.Controllers
 
         // GET: api/GetDocumentos/5
         public IHttpActionResult GetDocumentos(int id) //int id)
-        {
-            //var dato = DetalleServicio(id);
-            List<SPA_GetDocumentosPersonales_Result> listaDocumentos = GetFichaPersonalMgr.Instancia.getDocumentosPersonales(id);
-            //return Ok(dato);
+        {            
+            List<SPA_GetDocumentosPersonales_Result> listaDocumentos = GetFichaPersonalMgr.Instancia.getDocumentosPersonales(id);            
             return Json(listaDocumentos);
         }
 
-
-        //public List<DocumentosPersonalesModelo> DetalleServicio(int id)
-        //{
-        //    List<DocumentosPersonalesModelo> lista = new List<DocumentosPersonalesModelo>();
-
-        //    List<SPA_GetDocumentosPersonales_Result> listaDocumentos = GetFichaPersonalMgr.Instancia.getDocumentosPersonales(id);
-        //    List<int> listaDocumentosPersonales = listaDocumentos.Select(x => x.DocumentoID).Distinct().ToList();
-        //    foreach (var item in listaDocumentosPersonales)
-        //    {
-        //        SPA_GetDocumentosPersonales_Result obj = listaDocumentos.Where(x => x.DocumentoID == item).FirstOrDefault();
-        //        DocumentosPersonalesModelo documento_model = new DocumentosPersonalesModelo();
-        //        documento_model.documentos = obj.TipoDocumento;
-        //        List<DatosDocumentosModelo> listaDatosDocumentos = new List<DatosDocumentosModelo>();
-
-        //        List<int> listaDatosDocumentacion = listaDocumentos.Where(x => x.DocumentoID == item).Select(x => x.DocumentoID).Distinct().ToList();
-
-        //        foreach (var DatosDocumentos in listaDatosDocumentacion)
-        //        {
-
-        //            SPA_GetDocumentosPersonales_Result obj2 = listaDocumentos.Where(x => x.DocumentoID == DatosDocumentos).FirstOrDefault();
-        //            DatosDocumentosModelo datos_Modelo = new DatosDocumentosModelo();
-
-        //            datos_Modelo.NroDocumento = obj2.NumeroDocumento;
-        //            datos_Modelo.FechaEmision = obj2.FechaEmision.ToString("dd MMM yyyy");
-        //            datos_Modelo.FechaVencimiento = obj2.FechaVencimiento.ToString("dd MMM yyyy");
-        //            datos_Modelo.Observacion = obj2.Observacion;
-        //            listaDatosDocumentos.Add(datos_Modelo);
-        //        }
-        //        documento_model.datosdocumentos = listaDatosDocumentos;
-        //        lista.Add(documento_model);
-        //    }
-        //    return lista;
-        //}
+        // GET: api/GetDocumentos/5
+        public IHttpActionResult GetDocumentos(int id, int DocumentoPersonalID) //int id)
+        {            
+            List<SPA_GetDocumentosPersonales_Result> listaDocumentos = GetFichaPersonalMgr.Instancia.getDocumentosPersonales(id, DocumentoPersonalID);            
+            return Json(listaDocumentos);
+        }
 
         // POST: api/GetDocumentos
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public ResultModel Post([FromBody] DocumentosModelo documento)
         {
+            var dato = UpdateFichaPersonalMgr.Instancia.ActualizarDocumento(documento.empleadoID, documento.DocumentoID, documento.Numero,
+                            documento.FechaEmision, documento.FechaVencimiento, documento.Observacion, documento.ConAlerta,
+                            documento.Estado, documento.Referencia, documento.DocumentoPersonalID , documento.Identificador);                        
+            return (dato);
         }
 
         // PUT: api/GetDocumentos/5

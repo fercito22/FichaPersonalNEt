@@ -1,0 +1,102 @@
+@font-face {
+    font-family: "future";
+    src: url("../font/FuturaStd-Book.woff") format('woff');
+}
+#page-top{
+    font-family: future;
+}
+#borde{
+    border: 2px solid #EAF1F7;
+    /* background: #214363; */
+    background: #334F70;
+    color: #EAF1F7;
+    /* color: #ffffff; */
+   
+}
+#contenido{
+    padding-bottom: 3%;
+    
+   
+}
+#borde1{
+   border: 1px solid #EAF1F7;
+}
+#seccion1{
+    background: #EAF1F7;
+    /* background: #EEEEEE; */
+}
+#negrita{
+    font-weight: bold;
+}
+#botonEditar{
+    border: 1px #B36127 solid;
+    color: #ffffff;
+    background: #B36127 ;
+}
+#botonEditar:hover{
+    background: #FFB885;
+    color: #2F4765;
+    border: 1px #B36127 solid;
+}
+#opciones:hover{
+    background: #EEEEEE;
+
+}
+
+
+
+
+	
+.active {
+    /* color: green; */
+	font-family: Trebuchet MS, verdana, sans-serif;
+	font-size: 12px; 
+	font-weight: bold;
+	/* text-align: center; */
+}
+.active:link {
+    /* color: red; */
+	/* font-family: Trebuchet MS, verdana, sans-serif; */
+	font-size: 16px; 
+    font-weight: bold;
+    padding-left: 30px;	        
+    background-color: #2F4765;
+    /* background-color: #2F4765; */
+}
+.active:visited {
+    /* color: blueviolet; */
+	font-family: Trebuchet MS, verdana, sans-serif;
+	font-size: 12px; 
+	font-weight: bold;
+	/* text-align: center; */
+}
+.active:hover {
+    /* cuando el raton esta sobre; */
+    /* color: color  green; */
+	font-family: Trebuchet MS, verdana, sans-serif;
+	font-size: 12px; 
+	font-weight: bold;
+	/* text-align: center; */
+}
+
+
+
+/* #selec {
+    background: #f5a300 ;
+    color: #ffffff;
+  }
+
+  #selec2 {
+    background: #f5a300 ;
+    color: #ffffff;
+  } */
+
+
+/* #linea{    
+    border-radius: 0%;
+    width: 30%;
+    background: #ffffff;
+} */
+
+ 
+  

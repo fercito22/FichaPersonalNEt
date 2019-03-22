@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using WebAppEmberServicio.Models;
 using WebAppEmberServicio.Models.Comunicacion;
 using WebFichaPersonal.Data;
 using WebFichaPersonal.Logic;
@@ -24,14 +25,18 @@ namespace WebAppEmberServicio.Controllers
         public IHttpActionResult Get(int id)
         {
             List<SPA_GetComunicacion_Result> listaComunicacion = GetFichaPersonalMgr.Instancia.getComunicacion(id);
-           // var dato = DetalleServicio(id);
             return Json(listaComunicacion);
         }
 
         // POST: api/GetComunicacion
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public ResultModel Post([FromBody] ComunicacionModelo comunicacion)
         {
+            var dato = UpdateFichaPersonalMgr.Instancia.ActualizarComunicacion(comunicacion.empleadoID, comunicacion.tipoComunicacionID,
+                                    comunicacion.Valor );
+            return (dato);
         }
+
 
         // PUT: api/GetComunicacion/5
         public void Put(int id, [FromBody]string value)
@@ -56,13 +61,11 @@ namespace WebAppEmberServicio.Controllers
                 FichaPersonalModelo comunicacion_model = new FichaPersonalModelo();
                 comunicacion_model.empleado = obj.empleadoID;
                 List<DatosComunicacion> listaDatosComunicacion = new List<DatosComunicacion>();
-
-                //List<int> listaDatosComunicaciones = listaComunicacion.Where(x => x.empleadoID == item).Select(x => x.comunicacionID).Distinct().ToList();
+                
                 List<int> listaDatosComunicaciones = listaComunicacion.Where(x => x.empleadoID == item).Select(x => x.empleadoID).Distinct().ToList();
 
                 foreach (var DatosComunicacion in listaDatosComunicaciones)
-                {
-                    //SPA_GetComunicacion_Result obj2 = listaComunicacion.Where(x => x.comunicacionID == DatosComunicacion).FirstOrDefault();
+                {                    
                     SPA_GetComunicacion_Result obj2 = listaComunicacion.Where(x => x.empleadoID == DatosComunicacion).FirstOrDefault();
                     DatosComunicacion datos_Modelo = new DatosComunicacion();
                     datos_Modelo.Nombre = obj2.Nombre1;

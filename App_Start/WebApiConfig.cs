@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using System.Web.Http.Cors;
+
 
 namespace WebAppEmberServicio
 {
@@ -14,13 +16,20 @@ namespace WebAppEmberServicio
         {
             // Configuración y servicios de Web API
             // Configure Web API para usar solo la autenticación de token de portador.
+            //var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");            
+                        
+            // Web API configuration and services
+            //var cors = new EnableCorsAttribute ("*", "*", "*");
+            //config.EnableCors (cors);
             config.EnableCors();
-
-            config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-
-            // Rutas de Web API
+            // Web API routes
             config.MapHttpAttributeRoutes();
+
+            //config.SuppressDefaultHostAuthentication();
+            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
+            //// Rutas de Web API
+            //config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

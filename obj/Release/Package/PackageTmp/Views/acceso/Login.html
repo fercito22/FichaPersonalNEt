@@ -1,0 +1,75 @@
+﻿@model FichaPrueba.Models.LoginModel
+@{
+    Layout = "~/Views/Shared/_LayoutLogon.cshtml";
+    ViewBag.Title = "Intramet - BoA";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Intranet/Extranet - BoA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="" name="description" />
+    <meta content="themes-lab" name="author" />
+    <link href="~/Content/themes_boa/default/css/reset.css" rel="stylesheet" />
+</head>
+<body class="account separate-inputs" data-page="login">
+    <!-- BEGIN LOGIN BOX -->
+    <div class="container" id="login-block">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <div class="account-wall">
+                    <i class="user-img icons-faces-users-03"></i>
+                    <img src="@Url.Content(" ~/Images/boaWhite_200.png")" id="icoBoa" />
+
+                    @using (Html.BeginForm(null, null, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "nombre", @class = "form-signin", role = "form" }))
+                    {
+                    @Html.AntiForgeryToken()
+                    <h3>Ficha Personal</h3>
+                    @Html.ValidationSummary(true, null, new { @class = "errorMessage" })
+                    @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "errorMessage" })
+                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "errorMessage" })
+                    <div class="append-icon">
+                        @Html.TextBoxFor(m => m.UserName, new { placeholder = "Usuario", id = "username", @class = "form-control form-white username" })
+                        <i class="icon-user"></i>
+
+                    </div>
+                    <div class="append-icon m-b-20">
+                        <input class="form-control form-white password" data-val="true" data-val-required="The Contraseña field is required." id="password" name="Password" placeholder="Contraseña" type="password" style="color: black; background: white;">
+                        <i class="icon-lock"></i>
+
+                    </div>
+                    <button type="submit" id="submit-form" class="btn btn-lg btn-danger btn-block ladda-button" data-style="expand-left">Sign In</button>
+                    <div class="clearfix">
+                        <p class="pull-left m-t-20"><a id="password2" href="http://sms.obairlines.bo/AdmUser">Recuperar contraseña.</a></p>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery-1.11.3.js"></script>
+<script>
+    function copyrightPos() {
+        var windowHeight = $(window).height();
+        if (windowHeight < 700) {
+            $('.account-copyright').css('position', 'relative').css('margin-top', 40);
+        }
+        else {
+            $('.account-copyright').css('position', '').css('margin-top', '');
+        }
+    }
+    $(window).resize(function () {
+        copyrightPos();
+    });
+    //$(function () {
+    //    copyrightPos();
+    //    $.backstretch(["../Images/login_images/motor.jpg", "../Images/login_images/boeing_737_700.jpg", "../Images/login_images/aniversario.jpg", "../Images/login_images/ninho.jpg"], {
+    //        fade: 600,
+    //        duration: 4000
+    //    });
+    //});
+</script>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,12 +17,7 @@ namespace WebAppEmberServicio.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class GetPerfilController : ApiController
     {
-        // GET: api/GetPerfil
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2", "value3", "value4", "value5" };
-        //}
-
+        
         // GET: api/GetPerfil/5
         public IHttpActionResult Get(int id)
         {
@@ -35,8 +31,7 @@ namespace WebAppEmberServicio.Controllers
         {
             List<PersonalModelo> lista = new List<PersonalModelo>();
 
-            List<SPA_DatosPersonales_Result> medicoCabecera = GetFichaPersonalMgr.Instancia.getPersonal(id);
-            //List<SPA_DatosPersonales_Result> medicoCabecera = Personal(id);
+            List<SPA_DatosPersonales_Result> medicoCabecera = GetFichaPersonalMgr.Instancia.getPersonal(id);            
             List<int> listaMedicoCabecera = medicoCabecera.Select(x => x.empleadoID).Distinct().ToList();
             foreach (var item in listaMedicoCabecera)
             {
@@ -55,9 +50,57 @@ namespace WebAppEmberServicio.Controllers
             return lista;
         }    
 
-        // POST: api/GetPerfil
-        public void Post([FromBody]string value)
+        // POST: api/GetPerfil        
+        [HttpPost]
+        public ResultModel Post([FromBody] PerfilModelo perfil)
         {
+            var dato = ActualizarPerfil( perfil.empleadoID, perfil.Nombre1, perfil.Apellido1, perfil.Apellido2,
+                perfil.FechaNacimiento, perfil.Nacionalidad, perfil.CiudadNacimiento, perfil.LugarDeNacimiento,
+                perfil.Direccion, perfil.EstadoCivil );
+
+            return (dato);
+        }
+        
+        public ResultModel ActualizarPerfil(int empleadoID, string Nombre1, string Apellido1, string Apellido2,
+                string FechaNacimiento, string Nacionalidad, string CiudadNacimiento ,string LugarDeNacimiento,
+                string Direccion, int EstadoCivil)
+        {
+            PerfilModelo ObjPerfil = new PerfilModelo();
+           
+            string jsonPerfil = JsonConvert.SerializeObject(ObjPerfil);
+
+            try
+            {
+                using (var db = new FichaPersonalEntities())
+                {                    
+                    db.SPA_ActualizarPerfil(
+                    ObjPerfil.empleadoID = empleadoID,
+                    ObjPerfil.Nombre1 = Nombre1,
+                    ObjPerfil.Apellido1 = Apellido1,
+                    ObjPerfil.Apellido2 = Apellido2,
+                    ObjPerfil.FechaNacimiento = FechaNacimiento,
+                    ObjPerfil.Nacionalidad = Nacionalidad,
+                    ObjPerfil.CiudadNacimiento = "",
+                    ObjPerfil.LugarDeNacimiento = LugarDeNacimiento,
+                    ObjPerfil.Direccion = Direccion,
+                    ObjPerfil.EstadoCivil = EstadoCivil);
+                    return new ResultModel
+                    {
+                        objeto = ObjPerfil,
+                        codigo = 1,
+                        mensaje = "Se Guardo Exitosamente"
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                return new ResultModel
+                {
+                    objeto = ObjPerfil,
+                    codigo = -1,
+                    mensaje = "Intentelo nuevamente"
+                };
+            }
         }
 
         // PUT: api/GetPerfil/5

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using WebAppEmberServicio.Models;
 using WebFichaPersonal.Data;
 using WebFichaPersonal.Logic;
 
@@ -23,48 +24,23 @@ namespace WebAppEmberServicio.Controllers
         public IHttpActionResult GetTitulos(int id)
         {
             List<SPA_Titulos_Result> listaTitulos = GetFichaPersonalMgr.Instancia.getTitulos(id);
-            //var dato = DetalleServicio(id);
+            if(listaTitulos.Count == 0)
+            {
+                listaTitulos = new List<SPA_Titulos_Result>();
+            }
+            
             return Json(listaTitulos);
         }
 
-
-        //public List<TitulosModelo> DetalleServicio(int id)
-        //{
-        //    List<TitulosModelo> lista = new List<TitulosModelo>();
-
-        //    List<SPA_Titulos_Result> listaTitulos = GetFichaPersonalMgr.Instancia.getTitulos(id);
-        //    List<int> listaDocumentosPersonales = listaTitulos.Select(x => x.nivelAcademicoID).Distinct().ToList();
-        //    foreach (var item in listaDocumentosPersonales)
-        //    {
-        //        SPA_Titulos_Result obj = listaTitulos.Where(x => x.nivelAcademicoID == item).FirstOrDefault();
-        //        TitulosModelo titulos_model = new TitulosModelo();
-        //        titulos_model.GradoFormacion = obj.GradoFormacion;
-        //        List<DatosTituloModelo> listaDatosTitulos = new List<DatosTituloModelo>();
-
-        //        List<int> listaDatosDocumentacion = listaTitulos.Where(x => x.nivelAcademicoID == item).Select(x => x.nivelAcademicoID).Distinct().ToList();
-
-        //        foreach (var DatosTitulos in listaDatosDocumentacion)
-        //        {
-
-        //            SPA_Titulos_Result obj2 = listaTitulos.Where(x => x.nivelAcademicoID == DatosTitulos).FirstOrDefault();
-        //            DatosTituloModelo titulo_Modelo = new DatosTituloModelo();
-
-        //            titulo_Modelo.Titulo = obj2.titulo;
-        //            titulo_Modelo.Institucion = obj2.institucion;
-        //            titulo_Modelo.Desde = obj2.fechainicio; //.ToString("dd MMM yyyy");
-        //            titulo_Modelo.Hasta = obj2.fechafin; //.ToString("dd MMM yyyy");
-        //            listaDatosTitulos.Add(titulo_Modelo);
-        //        }
-        //        titulos_model.datostitulo = listaDatosTitulos;
-        //        lista.Add(titulos_model);
-        //    }
-        //    return lista;
-        //}
-
         // POST: api/GetFormacionAcademica
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public ResultModel Post([FromBody] FormacionAcademicaModelo formacion)
         {
+            var dato = UpdateFichaPersonalMgr.Instancia.ActualizarFormacionAcademica(formacion.empleadoID, formacion.nivelAcademicoID,
+                        formacion.titulo, formacion.institucion, formacion.fechainicio, formacion.fechafin, formacion.educacionSuperiorID, formacion.Identificador);            
+            return (dato);
         }
+               
 
         // PUT: api/GetFormacionAcademica/5
         public void Put(int id, [FromBody]string value)

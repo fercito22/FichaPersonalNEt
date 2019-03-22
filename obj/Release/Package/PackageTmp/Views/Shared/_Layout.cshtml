@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Ficha Personal</title>
+
+    @*<base href="/dist/" />*@
+    <base href="~/" />
+
+    
+    <meta name="boa/config/environment" content="%7B%22modulePrefix%22%3A%22boa%22%2C%22fontawesome%22%3A%7B%22icons%22%3A%7B%22free-solid-svg-icons%22%3A%22all%22%7D%7D%2C%22environment%22%3A%22production%22%2C%22rootURL%22%3A%22/%22%2C%22locationType%22%3A%22none%22%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%7D%2C%22EXTEND_PROTOTYPES%22%3A%7B%22Date%22%3Afalse%7D%7D%2C%22APP%22%3A%7B%22name%22%3A%22boa%22%2C%22version%22%3A%220.0.0+64ccec65%22%7D%2C%22baseURL%22%3A%22/dist%22%2C%22exportApplicationGlobal%22%3Afalse%7D" />
+    
+    <link rel="shortcut icon" href="@Url.Content("~/Content/icon/favicon1.ico")">
+
+    @*<script src="~/Content/assets/Pnotify/pnotify.custom.min-13e6e3d623e42913154a0a7e4ce83947.js"></script>
+    <script src="~/Content/assets/boa-3a4f7577f5bd5d8cc4ba6b015f1996b6.js"></script>*@
+
+    <link href="~/Content/assets/vendor-41726d3a21a0fef829d254feeb2de987.css" rel="stylesheet" />
+    <link href="~/Content/assets/boa-abeb375721898c8150e84c4fc67966f5.css" rel="stylesheet" />
+    <script src="~/Content/assets/vendor-e7b67b1b3294ee091d52e67b5e5fcc3f.js"></script>
+    <script src="~/Content/assets/boa-543d0fb5a055e23c1e318166964c5557.js"></script>
+
+
+
+</head>
+@*<body class="fixed-nav sticky-footer bg-dark" id="page-top">*@
+<body class="sticky-footer bg-dark" id="page-top">   
+
+
+   
+
+
+    @RenderBody()
+
+  
+
+    @RenderSection("scripts", required: false)
+    @*@Styles.Render("~/Content/font-awesome")*@
+</body>
+</html>
