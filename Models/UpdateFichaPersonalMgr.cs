@@ -85,6 +85,16 @@ namespace WebAppEmberServicio.Models
                     ObjPerfil.LugarDeNacimiento = LugarDeNacimiento,
                     ObjPerfil.Direccion = Direccion,
                     ObjPerfil.EstadoCivil = EstadoCivil);
+                   
+                    
+
+                    //aqui2
+                    string jsonPerfilo = JsonConvert.SerializeObject(ObjPerfil);
+                    string usuario = getUsuario(empleadoID);
+                    ActualizarLog(empleadoID, "Empleado-HistorialEstadoCivil-", "Update", jsonPerfilo, usuario);
+
+
+
                     return new ResultModel
                     {
                         objeto = ObjPerfil,
@@ -147,6 +157,28 @@ namespace WebAppEmberServicio.Models
                     {
                         mensaje = "Se Elimino";
                     }
+
+                    string tipo = "";
+                    if (Identificador == 0)
+                    {
+                        tipo = "Insert";
+                    }
+                    else
+                    {
+                        if (Identificador == 1)
+                        {
+                            tipo = "Update";
+                        }
+                        else
+                        {
+                            tipo = "Delete";
+                        }
+                    }
+
+                    //aqui2
+                    string jsonIdioma = JsonConvert.SerializeObject(ObjIdioma);
+                    string usuario = getUsuario(empleadoID);
+                    ActualizarLog(empleadoID, "AsignacionIdioma", tipo, jsonIdioma, usuario);
                     return new ResultModel
                     {
                         objeto = ObjIdioma,
@@ -198,6 +230,32 @@ namespace WebAppEmberServicio.Models
                     ObjComunicacion.Valor = Valor,
                     ObjComunicacion.Identificador = Identificador
                     );
+
+
+
+                    string tipo = "";
+                    if (Identificador == 0)
+                    {
+                        tipo = "Insert";
+                    }
+                    else
+                    {
+                        if (Identificador == 1)
+                        {
+                            tipo = "Update";
+                        }
+                        else
+                        {
+                            tipo = "Delete";
+                        }
+                    }
+
+                    //aqui2
+                    string jsonComunicacion = JsonConvert.SerializeObject(ObjComunicacion);
+                    string usuario = getUsuario(empleadoID);
+                    ActualizarLog(empleadoID, "Comunicacion", tipo, jsonComunicacion, usuario);
+
+
                     return new ResultModel
                     {
                         objeto = ObjComunicacion,
@@ -253,6 +311,30 @@ namespace WebAppEmberServicio.Models
                     ObjBachiller.UltimoCursoVencido = UltimoCursoVencido,
                     ObjBachiller.Identificador = Identificador
                     );
+
+                    string tipo = "";
+                    if (Identificador == 0)
+                    {
+                        tipo = "Insert";
+                    }
+                    else
+                    {
+                        if (Identificador == 1)
+                        {
+                            tipo = "Update";
+                        }
+                        else
+                        {
+                            tipo = "Delete";
+                        }
+                    }
+
+                    //aqui2
+                    string jsonBachiller= JsonConvert.SerializeObject(ObjBachiller);
+                    string usuario = getUsuario(empleadoID);
+                    ActualizarLog(empleadoID, "DatosBachillerat", tipo, jsonBachiller, usuario);
+
+
                     return new ResultModel
                     {
                         objeto = ObjBachiller,
@@ -290,8 +372,8 @@ namespace WebAppEmberServicio.Models
                 {
                     var comunicacion = db.SPA_GetContactoEmergencia(empleadoID).FirstOrDefault();
                     if (comunicacion != null)
-                    {                        
-                            Identificador = 1;
+                    {
+                        Identificador = 1;
                     }
                     else
                     {
@@ -309,6 +391,29 @@ namespace WebAppEmberServicio.Models
                     ObjContacto.NroCelular = NroCelular,
                     ObjContacto.Identificador = Identificador
                     );
+
+                    string tipo = "";
+                    if (Identificador == 0)
+                    {
+                        tipo = "Insert";
+                    }
+                    else
+                    {
+                        if (Identificador == 1)
+                        {
+                            tipo = "Update";
+                        }
+                        else
+                        {
+                            tipo = "Delete";
+                        }
+                    }
+
+                    //aqui2
+                    string jsonContacto= JsonConvert.SerializeObject(ObjContacto);
+                    string usuario = getUsuario(empleadoID);
+                    ActualizarLog(empleadoID, "ContactoPersonal", tipo, jsonContacto, usuario);
+
                     return new ResultModel
                     {
                         objeto = ObjContacto,
@@ -386,6 +491,29 @@ namespace WebAppEmberServicio.Models
                         ObjDocumento.DocumentoPersonalID = DocumentoPersonalID,
                         ObjDocumento.Identificador = Identificador
                         );
+
+                        string tipo = "";
+                        if (Identificador == 0)
+                        {
+                            tipo = "Insert";
+                        }
+                        else
+                        {
+                            if (Identificador == 1)
+                            {
+                                tipo = "Update";
+                            }
+                            else
+                            {
+                                tipo = "Delete";
+                            }
+                        }
+
+                        //aqui2
+                        string jsonDocumento = JsonConvert.SerializeObject(ObjDocumento);
+                        string usuario = getUsuario(empleadoID);
+                        ActualizarLog(empleadoID, "DocumentoPersonal", tipo, jsonDocumento, usuario);
+
                         return new ResultModel
                         {
                             objeto = ObjDocumento,
@@ -433,6 +561,30 @@ namespace WebAppEmberServicio.Models
                         ObjFormacion.educacionSuperiorID = educacionSuperiorID,                        
                         ObjFormacion.Identificador = Identificador
                         );
+
+                        string tipo = "";
+                        if (Identificador == 0)
+                        {
+                            tipo = "Insert";
+                        }
+                        else
+                        {
+                            if (Identificador == 1)
+                            {
+                                tipo = "Update";
+                            }
+                            else
+                            {
+                                tipo = "Delete";
+                            }
+                        }
+
+                        //aqui2
+                        string jsonFormacion = JsonConvert.SerializeObject(ObjFormacion);
+                        string usuario = getUsuario(empleadoID);
+                        ActualizarLog(empleadoID, "EducacionSuperior", tipo, jsonFormacion, usuario);
+
+
                         return new ResultModel
                         {
                             objeto = ObjFormacion,
@@ -490,6 +642,29 @@ namespace WebAppEmberServicio.Models
                     ObjMedico.RH_Sanguineo = RH_Sanguineo,
                     ObjMedico.Identificador = Identificador
                     );
+
+                    string tipo = "";
+                    if (Identificador == 0)
+                    {
+                        tipo = "Insert";
+                    }
+                    else
+                    {
+                        if (Identificador == 1)
+                        {
+                            tipo = "Update";
+                        }
+                        else
+                        {
+                            tipo = "Delete";
+                        }
+                    }
+
+                    //aqui2
+                    string jsonMedico = JsonConvert.SerializeObject(ObjMedico);
+                    string usuario = getUsuario(empleadoID);
+                    ActualizarLog(empleadoID, "HistorialMedico", tipo, jsonMedico, usuario);
+
                     return new ResultModel
                     {
                         objeto = ObjMedico,
@@ -575,7 +750,26 @@ namespace WebAppEmberServicio.Models
                     {
                         mensaje = "Se Elimino exitosamente";
                     }
-
+                    string tipo = "";
+                    if(Identificador == 0)
+                    {
+                        tipo = "Insert";
+                    }
+                    else
+                    {
+                        if (Identificador == 1)
+                        {
+                            tipo = "Update";
+                        }
+                        else
+                        {
+                            tipo = "Delete";
+                        }
+                    }
+                    
+                    string jsonBeneficiario = JsonConvert.SerializeObject(ObjBeneficiario);                    
+                    string usuario = getUsuario(empleadoID);
+                    ActualizarLog(empleadoID, "DatosFamiliares", tipo , jsonBeneficiario, usuario);
 
                     return new ResultModel
                     {
@@ -641,7 +835,8 @@ namespace WebAppEmberServicio.Models
                     item.ListaTallas.Insert(0, new DetalleTallasModelo() { codigo = "", nombre = "Selecionar Talla" });
                 }
                 // result.ListData = lista;
-            }
+            }            
+
             return lista;
 
         }
@@ -696,14 +891,15 @@ namespace WebAppEmberServicio.Models
         }
 
 
-        public ResultModel ActualizarTallasEmpleado(int id, string codTalla, string nombre)
+       
+        public ResultModel ActualizarTallasEmpleado(int id, string codTalla, string nombre, int empleadoID)
         {
             UpdateTallaModelo talla = new UpdateTallaModelo();
             talla.id = id;
             talla.codTalla = codTalla;
             talla.nombre = nombre;
 
-            string jsonPerfil = JsonConvert.SerializeObject(talla);
+            string jsonTallas = JsonConvert.SerializeObject(talla);
 
             try
             {
@@ -718,8 +914,11 @@ namespace WebAppEmberServicio.Models
                         update.Talla = nombre;
                         db.SaveChanges();
                         //db.SP_GuardarBitacora("UPDATE", Utiles.WebMgr.Instancia.GetIp(), User.Identity.Name, EntityToString(update), "");
-                        db.SP_GuardarBitacora("UPDATE", "123", "fernando", EntityToString(update), "");
-                       // LogTransaccionalMgr.Instancia.LogFichaPersonal(id, "EmpleadoItem", "MODIFICADO", jsonPerfil, "FICHA PERSONAL");
+                        //db.SP_GuardarBitacora("UPDATE", "123", "fernando", EntityToString(update), "");
+                        // LogTransaccionalMgr.Instancia.LogFichaPersonal(id, "EmpleadoItem", "MODIFICADO", jsonPerfil, "FICHA PERSONAL");
+                        // aqui LOG
+                        string usuario = getUsuario(empleadoID);                        
+                        ActualizarLog(update.EmpleadoItemID, "EmpleadoItem", "Insertar", jsonTallas , usuario );
                         return new ResultModel
                         {
                             objeto = null,
@@ -848,6 +1047,86 @@ namespace WebAppEmberServicio.Models
             //ResultModelErp<NombresItem> resultado = new JavaScriptSerializer()
             // .Deserialize<ResultModelErp<NombresItem>>(jsonString);
             return resultado.datos;// string.Join(",", resultado.datos.Select(m => m.id_funcionario));
+        }
+
+
+
+
+        //----------------
+        //  Mi Usuario ---
+        //----------------
+        public string getUsuario(int empleadoID)
+        {
+            string usuario = "";
+            try
+            {
+                using (var db = new FichaPersonalEntities())
+                {
+                    usuario = db.SPA_GetUsuario(empleadoID).FirstOrDefault().ToString();
+                    return usuario;
+                }
+            }
+            catch (Exception e)
+            {
+                return usuario;
+            }
+        }
+
+
+
+        //---------------------------------
+        //----- LOG DE FICHA PERSONAL   ---
+        //---------------------------------
+        public string miIp()
+        {
+            System.Web.HttpContext context = System.Web.HttpContext.Current;            
+
+            string szRemoteAddr = HttpContext.Current.Request.UserHostAddress;
+            string szXForwardedFor = HttpContext.Current.Request.ServerVariables["X_FORWARDED_FOR"];
+
+            string ip = HttpContext.Current.Request.UserHostAddress;
+           
+            return ip;
+        }
+
+     
+        public ResultModel ActualizarLog(int IdTabla, string Tabla, string Tipo, string Objeto, string Usuario)
+        {
+            LogFichaModelo ObjLog = new LogFichaModelo();
+            string jsonPerfil = JsonConvert.SerializeObject(ObjLog);
+
+            var IPs = miIp();
+            try
+            {
+                using (var db = new FichaPersonalEntities())
+                {                    
+                    db.SPA_LogFichaPersonal(
+                    ObjLog.IdTabla = IdTabla,
+                    ObjLog.Tabla = Tabla,
+                    ObjLog.Tipo = Tipo,
+                    ObjLog.Objeto = Objeto,
+                    ObjLog.Fecha = DateTime.Now, // .ToString("dd/MM/yyyy"),
+                    ObjLog.Usuario = Usuario,
+                    ObjLog.IPs = IPs,
+                    ObjLog.Sistema = "1"
+                    );
+                    return new ResultModel
+                    {
+                        objeto = ObjLog,
+                        codigo = 1,
+                        mensaje = "Se Guardo Exitosamente"
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                return new ResultModel
+                {
+                    objeto = ObjLog,
+                    codigo = -1,
+                    mensaje = "Intentelo nuevamente"
+                };
+            }
         }
 
 

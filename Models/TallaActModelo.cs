@@ -10,5 +10,7 @@ namespace WebAppEmberServicio.Models
         public int EmpleadoItemID { get; set; }
         public string codTalla { get; set; }
         public string Talla { get; set; }
+        public string id { get; set; }
+
     }
 }

@@ -293,6 +293,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdiomaModelo.cs" />
     <Compile Include="Models\LibroModelo.cs" />
+    <Compile Include="Models\LogFichaModelo.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\MedicoCabeceraModelo.cs" />
     <Compile Include="Models\NombresItem.cs" />

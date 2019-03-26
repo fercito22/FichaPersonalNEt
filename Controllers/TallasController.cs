@@ -66,7 +66,7 @@ namespace WebAppEmberServicio.Controllers
         public ResultModel Post([FromBody] TallaActModelo tallas)
         {
             var dato = UpdateFichaPersonalMgr.Instancia.ActualizarTallasEmpleado(tallas.EmpleadoItemID,
-                            tallas.codTalla, tallas.Talla);
+                            tallas.codTalla, tallas.Talla , tallas.id);
             return (dato);
         }
 

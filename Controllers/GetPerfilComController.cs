@@ -22,10 +22,21 @@ namespace WebAppEmberServicio.Controllers
         }
 
         // GET: api/GetPerfilCom/5
-        public IHttpActionResult GetDeclaracion(int id) //int id)
+        public IHttpActionResult GetPerfil(int id) //int id)
         {
-            List<SPA_GetPerfil_Result> listaDeclaracion = GetFichaPersonalMgr.Instancia.getPerfilCom(id);
-            return Json(listaDeclaracion);
+            List<SPA_GetPerfil_Result> listaPerfil = GetFichaPersonalMgr.Instancia.getPerfilCom(id);
+           // var Ip = UpdateFichaPersonalMgr.Instancia.miIp();
+
+            if (listaPerfil.Count == 0)
+            {
+                List<SPA_GetPerfilNuevo_Result> listaPerfilNuevo = GetFichaPersonalMgr.Instancia.getPerfilNuevo(id);
+                return Json(listaPerfilNuevo);
+            }
+            else
+            {
+                return Json(listaPerfil);
+            }
+            
         }
 
         // POST: api/GetPerfilCom
